@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain.behavior;
 
+import fun.barryhome.wallet.BizException;
 import fun.barryhome.wallet.domain.model.Wallet;
 
 import java.math.BigDecimal;
@@ -16,11 +17,11 @@ public class DebitBehavior extends DefaultBehavior {
     /**
      * 金额
      */
-    private final BigDecimal amount;
+    private final BigDecimal tradeAmount;
 
-    public DebitBehavior(Wallet wallet, BigDecimal amount) {
+    public DebitBehavior(Wallet wallet, BigDecimal tradeAmount) {
         super(wallet);
-        this.amount = amount;
+        this.tradeAmount = tradeAmount;
     }
 
     /**
@@ -28,8 +29,12 @@ public class DebitBehavior extends DefaultBehavior {
      */
     @Override
     public void doAction() {
+        if (tradeAmount.compareTo(BigDecimal.ZERO) <= 0){
+            throw new BizException("交易金额不能小于等于0");
+        }
+
         super.doAction();
 
-        wallet.setBalance(wallet.getBalance().subtract(amount));
+        wallet.setBalance(wallet.getBalance().subtract(tradeAmount));
     }
 }

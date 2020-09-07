@@ -9,12 +9,11 @@ import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created on 2020/9/7 2:41 下午
- *
+ * 转账
  * @author barry
  * Description:
  */
@@ -22,9 +21,9 @@ public class TransferService implements WalletService{
 
     private final BigDecimal tradeAmount;
 
-    private Wallet fromWallet;
+    private final Wallet fromWallet;
 
-    private Wallet toWallet;
+    private final Wallet toWallet;
 
     public TransferService(Wallet fromWallet, Wallet toWallet, BigDecimal tradeAmount){
         this.fromWallet = fromWallet;
