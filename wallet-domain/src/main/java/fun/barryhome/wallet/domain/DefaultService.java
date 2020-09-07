@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,10 @@ public abstract class DefaultService implements WalletService {
     @Setter(AccessLevel.PRIVATE)
     @Getter(AccessLevel.PROTECTED)
     private Wallet wallet;
+
+    @Setter(AccessLevel.PRIVATE)
+    @Getter(AccessLevel.PRIVATE)
+    private List<CheckPolicy> checkPolicies;
 
     public DefaultService(Wallet wallet) {
         this.wallet = wallet;
@@ -38,14 +43,29 @@ public abstract class DefaultService implements WalletService {
     protected abstract List<CheckPolicy> checkPolicies();
 
     /**
+     * 增加策略
+     * @param checkPolicy
+     * @return
+     */
+    public List<CheckPolicy> addPolicy(CheckPolicy checkPolicy){
+        if (checkPolicies == null){
+            checkPolicies = new ArrayList<>();
+        }
+
+        checkPolicies.add(checkPolicy);
+
+        return checkPolicies;
+    }
+
+    /**
      * 执行操作
      */
     @Override
-    public void run() {
+    public void exec() {
         if (checkPolicies() != null && checkPolicies().size() > 0) {
             checkPolicies().forEach(CheckPolicy::check);
         }
 
-        behavior().exec();
+        behavior().doAction();
     }
 }

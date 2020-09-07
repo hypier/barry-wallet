@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
  * Description:
  */
 @Data
+@Builder
 public class Wallet {
 
     /**

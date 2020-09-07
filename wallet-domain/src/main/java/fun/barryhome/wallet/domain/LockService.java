@@ -1,40 +1,31 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
-import fun.barryhome.wallet.domain.behavior.DebitBehavior;
+import fun.barryhome.wallet.domain.behavior.LockBehavior;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
-import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created on 2020/9/7 10:19 上午
- * 消费服务
+ * Created on 2020/9/7 3:17 下午
+ *
  * @author barry
  * Description:
  */
-public class ConsumeService extends DefaultService {
-    /**
-     * 消费金额
-     */
-    private final BigDecimal tradeAmount;
+public class LockService extends DefaultService {
 
-    public ConsumeService(Wallet wallet, BigDecimal tradeAmount) {
+    public LockService(Wallet wallet) {
         super(wallet);
-        this.tradeAmount = tradeAmount;
     }
-
 
     /**
      * 设置行为
      */
     @Override
     protected Behavior behavior() {
-        return new DebitBehavior(getWallet(), tradeAmount);
+        return new LockBehavior(getWallet());
     }
 
     /**
@@ -42,7 +33,6 @@ public class ConsumeService extends DefaultService {
      */
     @Override
     protected List<CheckPolicy> checkPolicies() {
-        addPolicy(new NoOverdraftAllowed(getWallet(), tradeAmount));
         return addPolicy(new NoStatusAllowed(getWallet()));
     }
 }

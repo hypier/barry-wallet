@@ -24,7 +24,7 @@ public abstract class DefaultBehavior implements Behavior {
      * 执行
      */
     @Override
-    public void exec() {
+    public void doAction() {
         if (wallet == null){
             throw new BizException("钱包未初始化");
         }

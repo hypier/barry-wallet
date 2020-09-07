@@ -20,8 +20,8 @@ public class LockBehavior extends DefaultBehavior {
      * 执行
      */
     @Override
-    public void exec() {
-        super.exec();
+    public void doAction() {
+        super.doAction();
         wallet.setWalletStatus(WalletStatus.Locked);
     }
 }

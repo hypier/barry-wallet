@@ -15,11 +15,11 @@ public class NoOverdraftAllowed extends DefaultCheckPolicy {
     /**
      * 金额
      */
-    private final BigDecimal amount;
+    private final BigDecimal tradeAmount;
 
-    public NoOverdraftAllowed(Wallet wallet, BigDecimal amount) {
+    public NoOverdraftAllowed(Wallet wallet, BigDecimal tradeAmount) {
         super(wallet);
-        this.amount = amount;
+        this.tradeAmount = tradeAmount;
     }
 
     /**
@@ -29,8 +29,11 @@ public class NoOverdraftAllowed extends DefaultCheckPolicy {
      */
     @Override
     public void check() {
+        if (tradeAmount.compareTo(BigDecimal.ZERO) <= 0){
+            throw new BizException("交易金额不能小于等于0");
+        }
 
-        if (wallet.getBalance().compareTo(amount) < 0){
+        if (wallet.getBalance().compareTo(tradeAmount) < 0){
             throw new BizException("余额不足");
         }
     }

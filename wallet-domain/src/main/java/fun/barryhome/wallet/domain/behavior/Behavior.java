@@ -10,5 +10,5 @@ public interface Behavior {
     /**
      * 执行
      */
-    void exec();
+    void doAction();
 }

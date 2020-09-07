@@ -5,20 +5,19 @@ import fun.barryhome.wallet.domain.model.Wallet;
 import java.math.BigDecimal;
 
 /**
- * Created on 2020/9/7 10:06 上午
- * 借记，金额减少
- *
+ * Created on 2020/9/7 2:51 下午
+ * 贷记，金额增加
  * @author barry
  * Description:
  */
-public class DebitBehavior extends DefaultBehavior {
+public class CreditBehavior extends DefaultBehavior {
 
     /**
      * 金额
      */
     private final BigDecimal amount;
 
-    public DebitBehavior(Wallet wallet, BigDecimal amount) {
+    public CreditBehavior(Wallet wallet, BigDecimal amount) {
         super(wallet);
         this.amount = amount;
     }
@@ -30,6 +29,6 @@ public class DebitBehavior extends DefaultBehavior {
     public void doAction() {
         super.doAction();
 
-        wallet.setBalance(wallet.getBalance().subtract(amount));
+        wallet.setBalance(wallet.getBalance().add(amount));
     }
 }
