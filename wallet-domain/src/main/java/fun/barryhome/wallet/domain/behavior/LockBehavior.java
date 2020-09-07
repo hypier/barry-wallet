@@ -1,7 +1,7 @@
 package fun.barryhome.wallet.domain.behavior;
 
 import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.WalletStatus;
+import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 
 /**
  * Created on 2020/9/7 10:42 上午
@@ -22,6 +22,6 @@ public class LockBehavior extends DefaultBehavior {
     @Override
     public void doAction() {
         super.doAction();
-        wallet.setWalletStatus(WalletStatus.Locked);
+        wallet.setWalletStatus(WalletStatus.LOCKED);
     }
 }

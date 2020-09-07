@@ -1,7 +1,7 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.WalletStatus;
+import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -20,7 +20,7 @@ class ConsumeServiceTest {
         return Wallet.builder()
                 .walletId(UUID.randomUUID().toString())
                 .balance(BigDecimal.valueOf(100))
-                .walletStatus(WalletStatus.Available)
+                .walletStatus(WalletStatus.AVAILABLE)
                 .build();
     }
 

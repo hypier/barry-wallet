@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.domain.model;
+package fun.barryhome.wallet.domain.model.enums;
 
 /**
  * Created by heyong on 2017/2/8 18:25.
@@ -7,26 +7,26 @@ public enum WalletStatus {
     /**
      * 未激活的
      */
-    Unactivated,
+    UNACTIVATED,
     /**
      * 锁定的
      */
-    Locked,
+    LOCKED,
     /**
      * 可用的
      */
-    Available,
+    AVAILABLE,
     /**
      * 挂失的
      */
-    Lost,
+    LOST,
     /**
      * 注销的
      */
-    Destroyed,
+    DESTROYED,
     /**
      * 异常的
      */
-    Abnormal,
+    ABNORMAL,
 
 }

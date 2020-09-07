@@ -1,6 +1,7 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
+import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import lombok.AccessLevel;

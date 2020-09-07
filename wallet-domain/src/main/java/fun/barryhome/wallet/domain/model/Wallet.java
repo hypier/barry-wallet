@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain.model;
 
+import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import lombok.Builder;
 import lombok.Data;
 

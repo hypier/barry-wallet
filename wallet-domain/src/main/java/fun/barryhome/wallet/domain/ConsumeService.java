@@ -27,7 +27,6 @@ public class ConsumeService extends DefaultService {
         this.tradeAmount = tradeAmount;
     }
 
-
     /**
      * 设置行为
      */

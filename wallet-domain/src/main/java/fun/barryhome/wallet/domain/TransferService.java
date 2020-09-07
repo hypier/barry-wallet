@@ -35,6 +35,7 @@ public class TransferService implements WalletService{
     @Override
     public void exec() {
         new DefaultService(fromWallet) {
+
             @Override
             protected Behavior behavior() {
                 return new DebitBehavior(getWallet(), tradeAmount);
@@ -48,6 +49,7 @@ public class TransferService implements WalletService{
         }.exec();
 
         new DefaultService(toWallet) {
+
             @Override
             protected Behavior behavior() {
                 return new CreditBehavior(getWallet(), tradeAmount);
