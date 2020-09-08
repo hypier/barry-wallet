@@ -3,11 +3,12 @@ package fun.barryhome.wallet.application;
 
 import fun.barryhome.wallet.common.model.TradeRecord;
 import fun.barryhome.wallet.common.model.Wallet;
-import fun.barryhome.wallet.common.repository.TradeRepository;
-import fun.barryhome.wallet.common.repository.WalletRepository;
+import fun.barryhome.wallet.repository.TradeRepository;
+import fun.barryhome.wallet.repository.WalletRepository;
 import fun.barryhome.wallet.service.RechargeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -31,6 +32,7 @@ public class TradeManager {
      * @param walletId
      * @param tradeAmount
      */
+    @Transactional(rollbackFor = Exception.class)
     public TradeRecord recharge(String walletId, BigDecimal tradeAmount) {
         Wallet wallet = walletRepository.findByWalletId(walletId);
         RechargeService rechargeService = new RechargeService(wallet, tradeAmount);

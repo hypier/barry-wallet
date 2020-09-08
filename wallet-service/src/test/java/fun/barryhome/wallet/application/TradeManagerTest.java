@@ -20,7 +20,6 @@ class TradeManagerTest {
 
     @Test
     void recharge() {
-        tradeManager.recharge("abc", BigDecimal.valueOf(20));
-
+        tradeManager.recharge("4bfe7223-ec2e-4788-8921-c1d9f1c7808e", BigDecimal.valueOf(20));
     }
 }

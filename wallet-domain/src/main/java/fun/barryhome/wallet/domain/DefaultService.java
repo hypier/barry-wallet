@@ -23,7 +23,6 @@ import java.util.UUID;
  * @author barry
  * Description:
  */
-@Data
 public abstract class DefaultService implements WalletService {
 
     protected abstract static class TradeConfig {
@@ -44,6 +43,7 @@ public abstract class DefaultService implements WalletService {
         public abstract List<CheckPolicy> checkPolicies();
     }
 
+    @Getter
     @Setter(AccessLevel.PRIVATE)
     private TradeRecord tradeRecord;
 
