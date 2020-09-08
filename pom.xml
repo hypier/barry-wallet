@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>wallet-domain</module>
+        <module>wallet-service</module>
     </modules>
     <name>wallet</name>
     <description>Demo project for Spring Boot</description>

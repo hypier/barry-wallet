@@ -1,7 +1,8 @@
-package fun.barryhome.wallet.domain;
+package fun.barryhome.wallet.service;
 
+import fun.barryhome.wallet.domain.DefaultService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
-import fun.barryhome.wallet.domain.behavior.DebitBehavior;
+import fun.barryhome.wallet.domain.behavior.LockBehavior;
 import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
@@ -10,24 +11,18 @@ import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created on 2020/9/7 10:19 上午
- * 消费服务
- *
+ * Created on 2020/9/8 5:05 下午
+ * 锁定
  * @author barry
  * Description:
  */
-public class ConsumeService extends DefaultService {
+public class LockService extends DefaultService {
 
-    public ConsumeService(TradeRecord tradeRecord) {
-        super(tradeRecord);
-    }
-
-    public ConsumeService(Wallet wallet, BigDecimal tradeAmount){
-        super(TradeRecord.builder().wallet(wallet).tradeAmount(tradeAmount).build());
+    public LockService(Wallet wallet) {
+        super(TradeRecord.builder().wallet(wallet).build());
     }
 
     @Override
@@ -35,22 +30,20 @@ public class ConsumeService extends DefaultService {
         return new TradeConfig() {
             @Override
             public TradeType tradeType() {
-                return TradeType.CONSUME;
+                return TradeType.LOCK;
             }
 
             @Override
             public Behavior behavior() {
-                return new DebitBehavior(getTradeRecord().getWallet(), getTradeRecord().getTradeAmount());
+                return new LockBehavior(getWallet());
             }
 
             @Override
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
-                        .add(new NoOverdraftAllowed(getTradeRecord().getWallet(), getTradeRecord().getTradeAmount()))
-                        .add(new NoStatusAllowed(getTradeRecord().getWallet()))
+                        .add(new NoStatusAllowed(getWallet()))
                         .build();
             }
         };
     }
-
 }

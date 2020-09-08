@@ -1,5 +1,7 @@
-package fun.barryhome.wallet.domain;
+package fun.barryhome.wallet.service;
 
+import fun.barryhome.wallet.domain.DefaultService;
+import fun.barryhome.wallet.domain.WalletService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.CreditBehavior;
 import fun.barryhome.wallet.domain.behavior.DebitBehavior;
@@ -60,7 +62,7 @@ public class TransferService implements WalletService {
                     @Override
                     public List<CheckPolicy> checkPolicies() {
                         return CheckPolicyBuilder.builder()
-                                .add(new NoOverdraftAllowed(fromWallet, getTradeRecord().getTradeAmount()))
+                                .add(new NoOverdraftAllowed(fromWallet, tradeAmount))
                                 .add(new NoStatusAllowed(fromWallet))
                                 .build();
                     }

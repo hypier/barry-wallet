@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.domain;
+package fun.barryhome.wallet.service;
 
 import fun.barryhome.wallet.domain.event.TradeEventSender;
 import fun.barryhome.wallet.domain.model.Wallet;
@@ -6,23 +6,23 @@ import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * Created on 2020/9/7 3:11 下午
+ * Created on 2020/9/8 4:59 下午
  *
  * @author barry
  * Description:
  */
 @SpringBootTest
-class TransferServiceTest {
+class RechargeRollbackServiceTest {
+
     @Autowired
     private TradeEventSender tradeEventSender;
 
-    private Wallet initWallet() {
+    private Wallet initWallet(){
         return Wallet.builder()
                 .walletId(UUID.randomUUID().toString())
                 .balance(BigDecimal.valueOf(100))
@@ -32,15 +32,14 @@ class TransferServiceTest {
 
     @Test
     void exec() {
-        Wallet fromWallet = initWallet();
-        Wallet toWallet = initWallet();
-        BigDecimal tradeAmount = BigDecimal.valueOf(70.9);
+        RechargeService rechargeService = new RechargeService(initWallet(), BigDecimal.valueOf(20));
+        rechargeService.done();
+        //tradeEventSender.send(rechargeService.getTradeRecord());
+        System.out.println(rechargeService.getTradeRecord());
 
-        TransferService transferService = new TransferService(fromWallet, toWallet, tradeAmount);
-        transferService.done();
-        tradeEventSender.send(transferService.getTradeRecords());
-
-        System.out.println(fromWallet);
-        System.out.println(toWallet);
+        RechargeRollbackService rollbackService = new RechargeRollbackService(rechargeService.getTradeRecord());
+        rollbackService.done();
+        //tradeEventSender.send(rollbackService.getTradeRecord());
+        System.out.println(rollbackService.getTradeRecord());
     }
 }

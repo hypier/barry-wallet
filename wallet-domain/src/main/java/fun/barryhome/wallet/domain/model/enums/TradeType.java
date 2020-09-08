@@ -10,5 +10,6 @@ public enum TradeType {
     RECHARGE,
     CONSUME,
     TRANSFER,
-    LOCK
+    LOCK,
+    RECHARGE_ROLLBACK,
 }

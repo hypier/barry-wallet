@@ -1,7 +1,5 @@
 package fun.barryhome.wallet.domain;
 
-import org.springframework.context.ApplicationEventPublisher;
-
 /**
  * Created on 2020/9/7 11:40 上午
  *

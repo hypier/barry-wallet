@@ -1,16 +1,16 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
-import fun.barryhome.wallet.domain.event.TradeEvent;
 import fun.barryhome.wallet.domain.model.TradeRecord;
+import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.UUID;
 @Data
 public abstract class DefaultService implements WalletService {
 
-    abstract static class TradeConfig {
+    protected abstract static class TradeConfig {
         /**
          * 交易类型
          *
@@ -46,20 +46,14 @@ public abstract class DefaultService implements WalletService {
     @Setter(AccessLevel.PRIVATE)
     private TradeRecord tradeRecord;
 
+    @Getter(AccessLevel.PROTECTED)
+    private Wallet wallet;
+
+    @Getter(AccessLevel.PROTECTED)
+    private BigDecimal tradeAmount;
+
     public DefaultService(TradeRecord tradeRecord) {
         this.tradeRecord = tradeRecord;
-        initTradeRecord();
-    }
-
-    public DefaultService() {
-    }
-
-    protected abstract TradeConfig tradeConfig();
-
-    /**
-     * 初始化 tradeRecord
-     */
-    private void initTradeRecord() {
 
         tradeRecord.setTradeType(tradeConfig().tradeType());
         tradeRecord.setInOutFlag(tradeConfig().behavior().getInOutFlag());
@@ -72,24 +66,26 @@ public abstract class DefaultService implements WalletService {
         if (tradeRecord.getTradeAmount() == null) {
             tradeRecord.setTradeAmount(BigDecimal.ZERO);
         }
+
+        wallet = tradeRecord.getWallet();
+        tradeAmount = tradeRecord.getTradeAmount();
     }
 
-    /**
-     * 检查策略
-     */
-    private void check() {
-        List<CheckPolicy> checkPolicies = tradeConfig().checkPolicies();
-        if (checkPolicies != null && checkPolicies.size() > 0) {
-            checkPolicies.forEach(CheckPolicy::check);
-        }
+    public DefaultService() {
     }
+
+    protected abstract TradeConfig tradeConfig();
+
 
     /**
      * 执行操作
      */
     @Override
     public void done() {
-        check();
+        List<CheckPolicy> checkPolicies = tradeConfig().checkPolicies();
+        if (checkPolicies != null && checkPolicies.size() > 0) {
+            checkPolicies.forEach(CheckPolicy::check);
+        }
 
         tradeConfig().behavior().doAction();
 

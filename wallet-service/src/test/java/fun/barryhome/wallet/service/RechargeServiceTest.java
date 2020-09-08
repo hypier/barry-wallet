@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.domain;
+package fun.barryhome.wallet.service;
 
 import fun.barryhome.wallet.domain.event.TradeEventSender;
 import fun.barryhome.wallet.domain.model.Wallet;
@@ -6,22 +6,18 @@ import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-
 /**
- * Created on 2020/9/7 12:07 下午
+ * Created on 2020/9/7 4:33 下午
  *
  * @author barry
  * Description:
  */
-
 @SpringBootTest
-class ConsumeServiceTest {
-
+class RechargeServiceTest {
     @Autowired
     private TradeEventSender tradeEventSender;
 
@@ -34,12 +30,11 @@ class ConsumeServiceTest {
     }
 
     @Test
-    public void ConsumeTest(){
+    void exec() {
+        RechargeService rechargeService = new RechargeService(initWallet(), BigDecimal.valueOf(20));
+        rechargeService.done();
+        tradeEventSender.send(rechargeService.getTradeRecord());
 
-        ConsumeService consumeService = new ConsumeService(initWallet(), BigDecimal.valueOf(20));
-        consumeService.done();
-        tradeEventSender.send(consumeService.getTradeRecord());
-
-        System.out.println(consumeService.getTradeRecord());
+        System.out.println(rechargeService.getTradeRecord());
     }
 }

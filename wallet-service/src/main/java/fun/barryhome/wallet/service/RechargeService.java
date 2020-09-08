@@ -1,5 +1,6 @@
-package fun.barryhome.wallet.domain;
+package fun.barryhome.wallet.service;
 
+import fun.barryhome.wallet.domain.DefaultService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.CreditBehavior;
 import fun.barryhome.wallet.domain.model.TradeRecord;
@@ -39,7 +40,7 @@ public class RechargeService extends DefaultService {
 
             @Override
             public Behavior behavior() {
-                return new CreditBehavior(getTradeRecord().getWallet(), getTradeRecord().getTradeAmount());
+                return new CreditBehavior(getWallet(), getTradeAmount());
             }
 
             @Override
