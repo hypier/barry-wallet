@@ -36,13 +36,6 @@ public abstract class DefaultService implements WalletService {
         public abstract TradeType tradeType();
 
         /**
-         * 进出状态
-         *
-         * @return
-         */
-        public abstract InOutFlag inOutFlag();
-
-        /**
          * 设置行为
          */
         public abstract Behavior behavior();
@@ -71,7 +64,7 @@ public abstract class DefaultService implements WalletService {
     private void initTradeRecord() {
 
         tradeRecord.setTradeType(tradeConfig().tradeType());
-        tradeRecord.setInOutFlag(tradeConfig().inOutFlag());
+        tradeRecord.setInOutFlag(tradeConfig().behavior().getInOutFlag());
         tradeRecord.setTradeStatus(TradeStatus.PROCESSING);
 
         if (Strings.isEmpty(tradeRecord.getTradeNumber())) {
@@ -101,5 +94,8 @@ public abstract class DefaultService implements WalletService {
         check();
 
         tradeConfig().behavior().doAction();
+
+        tradeRecord.setBalance(tradeRecord.getWallet().getBalance());
+        tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
     }
 }

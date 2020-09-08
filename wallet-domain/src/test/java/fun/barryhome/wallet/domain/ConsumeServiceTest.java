@@ -35,6 +35,6 @@ class ConsumeServiceTest {
         ConsumeService consumeService = new ConsumeService(tradeRecord);
         consumeService.done();
 
-        System.out.println(tradeRecord.getWallet());
+        System.out.println(tradeRecord);
     }
 }

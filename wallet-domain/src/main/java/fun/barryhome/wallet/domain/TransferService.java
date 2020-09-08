@@ -50,13 +50,8 @@ public class TransferService implements WalletService {
                     }
 
                     @Override
-                    public InOutFlag inOutFlag() {
-                        return InOutFlag.OUT;
-                    }
-
-                    @Override
                     public Behavior behavior() {
-                        return new DebitBehavior(getTradeRecord());
+                        return new DebitBehavior(fromWallet, tradeAmount);
                     }
 
                     @Override
@@ -81,13 +76,8 @@ public class TransferService implements WalletService {
                     }
 
                     @Override
-                    public InOutFlag inOutFlag() {
-                        return InOutFlag.IN;
-                    }
-
-                    @Override
                     public Behavior behavior() {
-                        return new CreditBehavior(getTradeRecord());
+                        return new CreditBehavior(toWallet, tradeAmount);
                     }
 
                     @Override

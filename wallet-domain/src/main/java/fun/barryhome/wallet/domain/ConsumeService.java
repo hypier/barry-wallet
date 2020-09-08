@@ -34,13 +34,8 @@ public class ConsumeService extends DefaultService {
             }
 
             @Override
-            public InOutFlag inOutFlag() {
-                return InOutFlag.OUT;
-            }
-
-            @Override
             public Behavior behavior() {
-                return new DebitBehavior(getTradeRecord());
+                return new DebitBehavior(getTradeRecord().getWallet(), getTradeRecord().getTradeAmount());
             }
 
             @Override

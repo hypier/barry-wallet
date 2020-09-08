@@ -33,13 +33,8 @@ public class RechargeService extends DefaultService {
             }
 
             @Override
-            public InOutFlag inOutFlag() {
-                return InOutFlag.IN;
-            }
-
-            @Override
             public Behavior behavior() {
-                return new CreditBehavior(getTradeRecord());
+                return new CreditBehavior(getTradeRecord().getWallet(), getTradeRecord().getTradeAmount());
             }
 
             @Override

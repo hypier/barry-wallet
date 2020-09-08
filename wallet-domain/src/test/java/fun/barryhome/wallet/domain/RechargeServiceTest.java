@@ -34,6 +34,6 @@ class RechargeServiceTest {
         RechargeService rechargeService = new RechargeService(tradeRecord);
         rechargeService.done();
 
-        System.out.println(tradeRecord.getWallet());
+        System.out.println(tradeRecord);
     }
 }

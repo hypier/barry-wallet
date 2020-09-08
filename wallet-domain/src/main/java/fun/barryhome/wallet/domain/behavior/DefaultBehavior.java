@@ -1,8 +1,7 @@
 package fun.barryhome.wallet.domain.behavior;
 
 import fun.barryhome.wallet.BizException;
-import fun.barryhome.wallet.domain.model.TradeRecord;
-import fun.barryhome.wallet.domain.model.enums.TradeStatus;
+import fun.barryhome.wallet.domain.model.Wallet;
 
 /**
  * Created on 2020/9/7 10:40 上午
@@ -13,12 +12,12 @@ import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 
 public abstract class DefaultBehavior implements Behavior {
     /**
-     * 交易
+     * 钱包
      */
-    protected TradeRecord tradeRecord;
+    protected Wallet wallet;
 
-    public DefaultBehavior(TradeRecord tradeRecord) {
-        this.tradeRecord = tradeRecord;
+    public DefaultBehavior(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     /**
@@ -26,10 +25,8 @@ public abstract class DefaultBehavior implements Behavior {
      */
     @Override
     public void doAction() {
-        if (tradeRecord.getWallet() == null){
+        if (wallet == null){
             throw new BizException("钱包未初始化");
         }
-
-        tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
     }
 }
