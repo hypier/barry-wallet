@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.domain.event;
+package fun.barryhome.wallet.event;
 
 import fun.barryhome.wallet.common.model.TradeEvent;
 import fun.barryhome.wallet.common.model.TradeRecord;

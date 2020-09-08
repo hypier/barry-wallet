@@ -1,16 +1,11 @@
 package fun.barryhome.wallet.service;
 
-import fun.barryhome.wallet.common.BizException;
-import fun.barryhome.wallet.common.enums.InOutFlag;
 import fun.barryhome.wallet.common.enums.TradeType;
 import fun.barryhome.wallet.common.model.TradeRecord;
 import fun.barryhome.wallet.domain.DefaultService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.DebitBehavior;
-import fun.barryhome.wallet.domain.policy.CheckPolicy;
-import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
-import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
-import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import fun.barryhome.wallet.domain.policy.*;
 
 import java.util.List;
 
@@ -28,10 +23,6 @@ public class RechargeRollbackService extends DefaultService {
                 .tradeAmount(sourceTrade.getTradeAmount())
                 .sourceNumber(sourceTrade.getTradeNumber())
                 .build());
-
-        if (!sourceTrade.getInOutFlag().equals(InOutFlag.IN)){
-            throw new BizException("不支持此类型");
-        }
     }
 
     @Override
@@ -50,6 +41,7 @@ public class RechargeRollbackService extends DefaultService {
             @Override
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
+                        .add(new NotRechargeAllowed(getTradeRecord()))
                         .add(new NoOverdraftAllowed(getWallet(), getTradeAmount()))
                         .add(new NoStatusAllowed(getWallet()))
                         .build();
