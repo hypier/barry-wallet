@@ -1,5 +1,6 @@
-package fun.barryhome.wallet.domain.model;
+package fun.barryhome.wallet.domain.event;
 
+import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
 import lombok.Getter;

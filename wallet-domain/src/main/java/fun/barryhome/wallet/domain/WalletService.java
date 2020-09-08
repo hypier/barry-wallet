@@ -14,10 +14,4 @@ public interface WalletService {
      * 执行
      */
     void done();
-
-    /**
-     * 发送事件
-     * @param applicationEventPublisher
-     */
-    void sendEvent(ApplicationEventPublisher applicationEventPublisher);
 }

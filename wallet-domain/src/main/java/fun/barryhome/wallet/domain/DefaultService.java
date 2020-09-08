@@ -1,7 +1,7 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
-import fun.barryhome.wallet.domain.model.TradeEvent;
+import fun.barryhome.wallet.domain.event.TradeEvent;
 import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
@@ -97,22 +97,4 @@ public abstract class DefaultService implements WalletService {
         tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
     }
 
-    /**
-     * 发送事件
-     *
-     * @param applicationEventPublisher
-     */
-    @Override
-    public void sendEvent(ApplicationEventPublisher applicationEventPublisher) {
-        applicationEventPublisher.publishEvent(new TradeEvent(tradeRecord));
-    }
-
-    /**
-     * 执行操作并发送事件
-     * @param applicationEventPublisher
-     */
-    public void doneAndSentEvent(ApplicationEventPublisher applicationEventPublisher){
-        done();
-        sendEvent(applicationEventPublisher);
-    }
 }

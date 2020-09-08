@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain;
 
+import fun.barryhome.wallet.domain.event.TradeEventSender;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import java.util.UUID;
 class ConsumeServiceTest {
 
     @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private TradeEventSender tradeEventSender;
 
     private Wallet initWallet(){
         return Wallet.builder()
@@ -36,7 +37,8 @@ class ConsumeServiceTest {
     public void ConsumeTest(){
 
         ConsumeService consumeService = new ConsumeService(initWallet(), BigDecimal.valueOf(20));
-        consumeService.doneAndSentEvent(applicationEventPublisher);
+        consumeService.done();
+        tradeEventSender.send(consumeService.getTradeRecord());
 
         System.out.println(consumeService.getTradeRecord());
     }

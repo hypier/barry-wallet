@@ -11,6 +11,7 @@ import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import lombok.Getter;
 import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
@@ -28,8 +29,9 @@ public class TransferService implements WalletService {
     private final BigDecimal tradeAmount;
     private final Wallet fromWallet;
     private final Wallet toWallet;
-    private DefaultService fromService;
-    private DefaultService toService;
+
+    @Getter
+    private TradeRecord[] tradeRecords;
 
     public TransferService(Wallet fromWallet, Wallet toWallet, BigDecimal tradeAmount) {
         this.fromWallet = fromWallet;
@@ -40,7 +42,7 @@ public class TransferService implements WalletService {
 
     @Override
     public void done() {
-        fromService = new DefaultService(TradeRecord.builder().wallet(fromWallet).tradeAmount(tradeAmount).build()) {
+        DefaultService fromService = new DefaultService(TradeRecord.builder().wallet(fromWallet).tradeAmount(tradeAmount).build()) {
 
             @Override
             protected TradeConfig tradeConfig() {
@@ -65,7 +67,7 @@ public class TransferService implements WalletService {
                 };
             }
         };
-        toService = new DefaultService(TradeRecord.builder().wallet(toWallet).tradeAmount(tradeAmount).build()) {
+        DefaultService toService = new DefaultService(TradeRecord.builder().wallet(toWallet).tradeAmount(tradeAmount).build()) {
 
             @Override
             protected TradeConfig tradeConfig() {
@@ -88,19 +90,12 @@ public class TransferService implements WalletService {
             }
         };
 
+        tradeRecords = new TradeRecord[2];
+        tradeRecords[0] = fromService.getTradeRecord();
+        tradeRecords[1] = toService.getTradeRecord();
+
         fromService.done();
         toService.done();
     }
 
-
-    /**
-     * 发送事件
-     *
-     * @param applicationEventPublisher
-     */
-    @Override
-    public void sendEvent(ApplicationEventPublisher applicationEventPublisher) {
-        fromService.sendEvent(applicationEventPublisher);
-        toService.sendEvent(applicationEventPublisher);
-    }
 }

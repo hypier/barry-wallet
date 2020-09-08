@@ -1,6 +1,6 @@
 package fun.barryhome.wallet.application;
 
-import fun.barryhome.wallet.domain.model.TradeEvent;
+import fun.barryhome.wallet.domain.event.TradeEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 

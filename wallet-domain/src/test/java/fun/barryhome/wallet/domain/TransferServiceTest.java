@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain;
 
+import fun.barryhome.wallet.domain.event.TradeEventSender;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @SpringBootTest
 class TransferServiceTest {
     @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private TradeEventSender tradeEventSender;
 
     private Wallet initWallet() {
         return Wallet.builder()
@@ -37,7 +38,7 @@ class TransferServiceTest {
 
         TransferService transferService = new TransferService(fromWallet, toWallet, tradeAmount);
         transferService.done();
-        transferService.sendEvent(applicationEventPublisher);
+        tradeEventSender.send(transferService.getTradeRecords());
 
         System.out.println(fromWallet);
         System.out.println(toWallet);
