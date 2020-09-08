@@ -30,7 +30,7 @@ class TransferServiceTest {
         BigDecimal tradeAmount = BigDecimal.valueOf(70.9);
 
         TransferService transferService = new TransferService(fromWallet, toWallet, tradeAmount);
-        transferService.exec();
+        transferService.done();
 
         System.out.println(fromWallet);
         System.out.println(toWallet);

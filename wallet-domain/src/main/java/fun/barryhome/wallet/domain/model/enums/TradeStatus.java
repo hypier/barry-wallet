@@ -7,16 +7,16 @@ package fun.barryhome.wallet.domain.model.enums;
  * Description:
  */
 public enum TradeStatus {
+    /**
+     * 处理中
+     */
+    PROCESSING,
 
     /**
      * 处理完成
      */
     SUCCEED,
 
-    /**
-     * 处理中
-     */
-    PROCESSING,
     /**
      * 失败
      */

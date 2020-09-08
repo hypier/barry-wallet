@@ -1,6 +1,6 @@
 package fun.barryhome.wallet.domain.behavior;
 
-import fun.barryhome.wallet.domain.model.Wallet;
+import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 
 /**
@@ -12,8 +12,8 @@ import fun.barryhome.wallet.domain.model.enums.WalletStatus;
  */
 public class LockBehavior extends DefaultBehavior {
 
-    public LockBehavior(Wallet wallet) {
-        super(wallet);
+    public LockBehavior(TradeRecord tradeRecord) {
+        super(tradeRecord);
     }
 
     /**
@@ -22,6 +22,6 @@ public class LockBehavior extends DefaultBehavior {
     @Override
     public void doAction() {
         super.doAction();
-        wallet.setWalletStatus(WalletStatus.LOCKED);
+        tradeRecord.getWallet().setWalletStatus(WalletStatus.LOCKED);
     }
 }

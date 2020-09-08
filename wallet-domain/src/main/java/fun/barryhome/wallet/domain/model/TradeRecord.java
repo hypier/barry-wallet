@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain.model;
 
+import fun.barryhome.wallet.domain.model.enums.InOutFlag;
 import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
 import lombok.Builder;
@@ -27,7 +28,7 @@ public class TradeRecord {
     /**
      * 进出标识
      */
-    private int inOutFlag;
+    private InOutFlag inOutFlag;
     /**
      * 交易类型
      */
@@ -39,7 +40,7 @@ public class TradeRecord {
     /**
      * 钱包ID
      */
-    private String walletId;
+    private Wallet wallet;
     /**
      * 备注
      */

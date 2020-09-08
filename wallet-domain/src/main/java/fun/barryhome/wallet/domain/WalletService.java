@@ -7,5 +7,9 @@ package fun.barryhome.wallet.domain;
  * Description:
  */
 public interface WalletService {
-    void exec();
+
+    /**
+     * 执行
+     */
+    void done();
 }

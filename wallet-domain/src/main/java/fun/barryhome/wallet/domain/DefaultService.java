@@ -3,14 +3,20 @@ package fun.barryhome.wallet.domain;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.Wallet;
+import fun.barryhome.wallet.domain.model.enums.InOutFlag;
+import fun.barryhome.wallet.domain.model.enums.TradeStatus;
+import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.logging.log4j.util.Strings;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created on 2020/9/7 10:28 上午
@@ -21,52 +27,79 @@ import java.util.List;
 @Data
 public abstract class DefaultService implements WalletService {
 
+    abstract static class TradeConfig {
+        /**
+         * 交易类型
+         *
+         * @return
+         */
+        public abstract TradeType tradeType();
+
+        /**
+         * 进出状态
+         *
+         * @return
+         */
+        public abstract InOutFlag inOutFlag();
+
+        /**
+         * 设置行为
+         */
+        public abstract Behavior behavior();
+
+        /**
+         * 设置检查策略
+         */
+        public abstract List<CheckPolicy> checkPolicies();
+    }
+
     @Setter(AccessLevel.PRIVATE)
     @Getter(AccessLevel.PROTECTED)
-    private Wallet wallet;
+    private TradeRecord tradeRecord;
 
-    @Setter(AccessLevel.PRIVATE)
-    @Getter(AccessLevel.PRIVATE)
-    private List<CheckPolicy> checkPolicies;
+    public DefaultService(TradeRecord tradeRecord) {
+        this.tradeRecord = tradeRecord;
+        initTradeRecord();
+    }
 
-    public DefaultService(Wallet wallet) {
-        this.wallet = wallet;
+    protected abstract TradeConfig tradeConfig();
+
+    /**
+     * 初始化 tradeRecord
+     *
+     */
+    private void initTradeRecord() {
+
+        tradeRecord.setTradeType(tradeConfig().tradeType());
+        tradeRecord.setInOutFlag(tradeConfig().inOutFlag());
+        tradeRecord.setTradeStatus(TradeStatus.PROCESSING);
+
+        if (Strings.isEmpty(tradeRecord.getTradeNumber())) {
+            tradeRecord.setTradeNumber(UUID.randomUUID().toString());
+        }
+
+        if (tradeRecord.getTradeAmount() == null) {
+            tradeRecord.setTradeAmount(BigDecimal.ZERO);
+        }
     }
 
     /**
-     * 设置行为
+     * 检查策略
      */
-    protected abstract Behavior behavior();
-
-    /**
-     * 设置检查策略
-     */
-    protected abstract List<CheckPolicy> checkPolicies();
-
-    /**
-     * 增加策略
-     * @param checkPolicy
-     * @return
-     */
-    public List<CheckPolicy> addPolicy(CheckPolicy checkPolicy){
-        if (checkPolicies == null){
-            checkPolicies = new ArrayList<>();
+    private void check() {
+        List<CheckPolicy> checkPolicies = tradeConfig().checkPolicies();
+        if (checkPolicies != null && checkPolicies.size() > 0) {
+            checkPolicies.forEach(CheckPolicy::check);
         }
-
-        checkPolicies.add(checkPolicy);
-
-        return checkPolicies;
     }
 
     /**
      * 执行操作
      */
     @Override
-    public void exec() {
-        if (checkPolicies() != null && checkPolicies().size() > 0) {
-            checkPolicies().forEach(CheckPolicy::check);
-        }
+    public void done() {
+        check();
 
-        behavior().doAction();
+        tradeConfig().behavior().doAction();
     }
 }

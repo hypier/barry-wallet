@@ -2,10 +2,11 @@ package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.CreditBehavior;
-import fun.barryhome.wallet.domain.model.Wallet;
+import fun.barryhome.wallet.domain.model.TradeRecord;
+import fun.barryhome.wallet.domain.model.enums.InOutFlag;
+import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -16,29 +17,36 @@ import java.util.List;
  * Description:
  */
 public class RechargeService extends DefaultService {
-    /**
-     * 消费金额
-     */
-    private final BigDecimal tradeAmount;
 
-    public RechargeService(Wallet wallet, BigDecimal tradeAmount) {
-        super(wallet);
-        this.tradeAmount = tradeAmount;
+
+    public RechargeService(TradeRecord tradeRecord) {
+        super(tradeRecord);
     }
 
-    /**
-     * 设置行为
-     */
     @Override
-    protected Behavior behavior() {
-        return new CreditBehavior(getWallet(), tradeAmount);
+    protected TradeConfig tradeConfig() {
+        return new TradeConfig() {
+
+            @Override
+            public TradeType tradeType() {
+                return TradeType.RECHARGE;
+            }
+
+            @Override
+            public InOutFlag inOutFlag() {
+                return InOutFlag.IN;
+            }
+
+            @Override
+            public Behavior behavior() {
+                return new CreditBehavior(getTradeRecord());
+            }
+
+            @Override
+            public List<CheckPolicy> checkPolicies() {
+                return null;
+            }
+        };
     }
 
-    /**
-     * 设置检查策略
-     */
-    @Override
-    protected List<CheckPolicy> checkPolicies() {
-        return null;
-    }
 }

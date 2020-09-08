@@ -1,5 +1,6 @@
 package fun.barryhome.wallet.domain;
 
+import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
@@ -26,12 +27,14 @@ class ConsumeServiceTest {
 
     @Test
     public void ConsumeTest(){
-        Wallet wallet = initWallet();
+        TradeRecord tradeRecord = TradeRecord.builder()
+                .wallet(initWallet())
+                .tradeAmount(BigDecimal.valueOf(20))
+                .build();
 
-        BigDecimal tradeAmount = BigDecimal.valueOf(20);
-        ConsumeService consumeService = new ConsumeService(wallet, tradeAmount);
-        consumeService.exec();
+        ConsumeService consumeService = new ConsumeService(tradeRecord);
+        consumeService.done();
 
-        System.out.println(wallet);
+        System.out.println(tradeRecord.getWallet());
     }
 }
