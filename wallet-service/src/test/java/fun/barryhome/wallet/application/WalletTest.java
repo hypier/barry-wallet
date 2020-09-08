@@ -24,7 +24,7 @@ public class WalletTest {
     @Test
     public void create(){
         Wallet wallet = Wallet.builder()
-                .walletId("4bfe7223-ec2e-4788-8921-c1d9f1c7808e")
+                .walletId("4bfe7223-ec2e-4788-8921-c1d9f1c7808o")
                 .balance(BigDecimal.valueOf(100))
                 .walletStatus(WalletStatus.AVAILABLE)
                 .build();

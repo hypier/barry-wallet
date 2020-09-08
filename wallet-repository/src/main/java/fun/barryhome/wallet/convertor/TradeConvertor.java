@@ -17,6 +17,9 @@ public class TradeConvertor {
         TradeDo tradeDo = TradeDo.builder().build();
         BeanUtils.copyProperties(tradeRecord, tradeDo);
         tradeDo.setWalletId(tradeRecord.getWallet().getWalletId());
+        if (tradeRecord.getVersion() == null){
+            tradeDo.setVersion(0L);
+        }
         return tradeDo;
     }
 
