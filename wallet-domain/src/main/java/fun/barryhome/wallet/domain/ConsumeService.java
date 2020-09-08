@@ -3,13 +3,14 @@ package fun.barryhome.wallet.domain;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.DebitBehavior;
 import fun.barryhome.wallet.domain.model.TradeRecord;
-import fun.barryhome.wallet.domain.model.enums.InOutFlag;
+import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +24,10 @@ public class ConsumeService extends DefaultService {
 
     public ConsumeService(TradeRecord tradeRecord) {
         super(tradeRecord);
+    }
+
+    public ConsumeService(Wallet wallet, BigDecimal tradeAmount){
+        super(TradeRecord.builder().wallet(wallet).tradeAmount(tradeAmount).build());
     }
 
     @Override
