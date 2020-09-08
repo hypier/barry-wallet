@@ -11,6 +11,7 @@ import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,10 +26,10 @@ import java.util.List;
 public class TransferService implements WalletService {
 
     private final BigDecimal tradeAmount;
-
     private final Wallet fromWallet;
-
     private final Wallet toWallet;
+    private DefaultService fromService;
+    private DefaultService toService;
 
     public TransferService(Wallet fromWallet, Wallet toWallet, BigDecimal tradeAmount) {
         this.fromWallet = fromWallet;
@@ -39,7 +40,7 @@ public class TransferService implements WalletService {
 
     @Override
     public void done() {
-        new DefaultService(TradeRecord.builder().wallet(fromWallet).tradeAmount(tradeAmount).build()) {
+        fromService = new DefaultService(TradeRecord.builder().wallet(fromWallet).tradeAmount(tradeAmount).build()) {
 
             @Override
             protected TradeConfig tradeConfig() {
@@ -63,9 +64,8 @@ public class TransferService implements WalletService {
                     }
                 };
             }
-        }.done();
-
-        new DefaultService(TradeRecord.builder().wallet(toWallet).tradeAmount(tradeAmount).build()) {
+        };
+        toService = new DefaultService(TradeRecord.builder().wallet(toWallet).tradeAmount(tradeAmount).build()) {
 
             @Override
             protected TradeConfig tradeConfig() {
@@ -86,6 +86,21 @@ public class TransferService implements WalletService {
                     }
                 };
             }
-        }.done();
+        };
+
+        fromService.done();
+        toService.done();
+    }
+
+
+    /**
+     * 发送事件
+     *
+     * @param applicationEventPublisher
+     */
+    @Override
+    public void sendEvent(ApplicationEventPublisher applicationEventPublisher) {
+        fromService.sendEvent(applicationEventPublisher);
+        toService.sendEvent(applicationEventPublisher);
     }
 }

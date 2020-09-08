@@ -3,6 +3,9 @@ package fun.barryhome.wallet.domain;
 import fun.barryhome.wallet.domain.model.Wallet;
 import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -14,7 +17,12 @@ import java.util.UUID;
  * @author barry
  * Description:
  */
+
+@SpringBootTest
 class ConsumeServiceTest {
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     private Wallet initWallet(){
         return Wallet.builder()
@@ -28,7 +36,7 @@ class ConsumeServiceTest {
     public void ConsumeTest(){
 
         ConsumeService consumeService = new ConsumeService(initWallet(), BigDecimal.valueOf(20));
-        consumeService.done();
+        consumeService.doneAndSentEvent(applicationEventPublisher);
 
         System.out.println(consumeService.getTradeRecord());
     }

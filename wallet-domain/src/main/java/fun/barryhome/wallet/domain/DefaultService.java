@@ -1,6 +1,7 @@
 package fun.barryhome.wallet.domain;
 
 import fun.barryhome.wallet.domain.behavior.Behavior;
+import fun.barryhome.wallet.domain.model.TradeEvent;
 import fun.barryhome.wallet.domain.model.TradeRecord;
 import fun.barryhome.wallet.domain.model.enums.TradeStatus;
 import fun.barryhome.wallet.domain.model.enums.TradeType;
@@ -9,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,7 +29,6 @@ public abstract class DefaultService implements WalletService {
         /**
          * 交易类型
          *
-         * @return
          */
         public abstract TradeType tradeType();
 
@@ -94,5 +95,24 @@ public abstract class DefaultService implements WalletService {
 
         tradeRecord.setBalance(tradeRecord.getWallet().getBalance());
         tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
+    }
+
+    /**
+     * 发送事件
+     *
+     * @param applicationEventPublisher
+     */
+    @Override
+    public void sendEvent(ApplicationEventPublisher applicationEventPublisher) {
+        applicationEventPublisher.publishEvent(new TradeEvent(tradeRecord));
+    }
+
+    /**
+     * 执行操作并发送事件
+     * @param applicationEventPublisher
+     */
+    public void doneAndSentEvent(ApplicationEventPublisher applicationEventPublisher){
+        done();
+        sendEvent(applicationEventPublisher);
     }
 }
