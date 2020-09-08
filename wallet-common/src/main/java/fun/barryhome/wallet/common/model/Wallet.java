@@ -1,6 +1,6 @@
-package fun.barryhome.wallet.domain.model;
+package fun.barryhome.wallet.common.model;
 
-import fun.barryhome.wallet.domain.model.enums.WalletStatus;
+import fun.barryhome.wallet.common.enums.WalletStatus;
 import lombok.Builder;
 import lombok.Data;
 
@@ -33,4 +33,8 @@ public class Wallet {
      */
     private BigDecimal balance;
 
+    /**
+     * 版本号
+     */
+    private Long version;
 }

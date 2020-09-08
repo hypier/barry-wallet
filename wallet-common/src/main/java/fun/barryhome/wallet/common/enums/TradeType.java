@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.domain.model.enums;
+package fun.barryhome.wallet.common.enums;
 
 /**
  * Created on 2020/9/7 4:47 下午

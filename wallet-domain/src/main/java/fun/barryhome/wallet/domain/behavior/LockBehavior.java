@@ -1,8 +1,8 @@
 package fun.barryhome.wallet.domain.behavior;
 
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.InOutFlag;
-import fun.barryhome.wallet.domain.model.enums.WalletStatus;
+import fun.barryhome.wallet.common.enums.InOutFlag;
+import fun.barryhome.wallet.common.enums.WalletStatus;
+import fun.barryhome.wallet.common.model.Wallet;
 
 /**
  * Created on 2020/9/7 10:42 上午

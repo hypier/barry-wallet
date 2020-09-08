@@ -1,10 +1,11 @@
 package fun.barryhome.wallet.domain;
 
+
+import fun.barryhome.wallet.common.enums.TradeStatus;
+import fun.barryhome.wallet.common.enums.TradeType;
+import fun.barryhome.wallet.common.model.TradeRecord;
+import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.domain.behavior.Behavior;
-import fun.barryhome.wallet.domain.model.TradeRecord;
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.TradeStatus;
-import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import lombok.AccessLevel;
 import lombok.Data;

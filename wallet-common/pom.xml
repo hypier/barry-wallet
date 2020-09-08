@@ -9,15 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wallet-domain</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>fun.barryhome</groupId>
-            <artifactId>wallet-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>wallet-common</artifactId>
 
 
 </project>

@@ -1,6 +1,7 @@
 package fun.barryhome.wallet.domain.policy;
 
-import fun.barryhome.wallet.domain.model.Wallet;
+
+import fun.barryhome.wallet.common.model.Wallet;
 
 /**
  * Created on 2020/9/7 11:28 上午

@@ -1,7 +1,7 @@
 package fun.barryhome.wallet.domain.behavior;
 
-import fun.barryhome.wallet.BizException;
-import fun.barryhome.wallet.domain.model.Wallet;
+import fun.barryhome.wallet.common.BizException;
+import fun.barryhome.wallet.common.model.Wallet;
 
 /**
  * Created on 2020/9/7 10:40 上午

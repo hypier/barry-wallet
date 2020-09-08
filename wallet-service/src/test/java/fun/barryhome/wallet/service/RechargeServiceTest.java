@@ -1,8 +1,8 @@
 package fun.barryhome.wallet.service;
 
+import fun.barryhome.wallet.common.enums.WalletStatus;
+import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.domain.event.TradeEventSender;
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.WalletStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,8 +1,8 @@
-package fun.barryhome.wallet.domain.model;
+package fun.barryhome.wallet.common.model;
 
-import fun.barryhome.wallet.domain.model.enums.InOutFlag;
-import fun.barryhome.wallet.domain.model.enums.TradeStatus;
-import fun.barryhome.wallet.domain.model.enums.TradeType;
+import fun.barryhome.wallet.common.enums.InOutFlag;
+import fun.barryhome.wallet.common.enums.TradeStatus;
+import fun.barryhome.wallet.common.enums.TradeType;
 import lombok.Builder;
 import lombok.Data;
 

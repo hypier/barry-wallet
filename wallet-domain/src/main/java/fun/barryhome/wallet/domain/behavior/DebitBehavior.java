@@ -1,8 +1,8 @@
 package fun.barryhome.wallet.domain.behavior;
 
-import fun.barryhome.wallet.BizException;
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.InOutFlag;
+import fun.barryhome.wallet.common.BizException;
+import fun.barryhome.wallet.common.enums.InOutFlag;
+import fun.barryhome.wallet.common.model.Wallet;
 
 import java.math.BigDecimal;
 

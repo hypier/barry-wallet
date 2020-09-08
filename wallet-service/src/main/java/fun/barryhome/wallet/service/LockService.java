@@ -1,14 +1,13 @@
 package fun.barryhome.wallet.service;
 
+import fun.barryhome.wallet.common.enums.TradeType;
+import fun.barryhome.wallet.common.model.TradeRecord;
+import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.domain.DefaultService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.LockBehavior;
-import fun.barryhome.wallet.domain.model.TradeRecord;
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.TradeType;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
-import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
 import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package fun.barryhome.wallet.domain.event;
 
-import fun.barryhome.wallet.domain.model.TradeRecord;
+import fun.barryhome.wallet.common.model.TradeEvent;
+import fun.barryhome.wallet.common.model.TradeRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

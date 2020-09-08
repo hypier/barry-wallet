@@ -1,6 +1,6 @@
 package fun.barryhome.wallet.domain.behavior;
 
-import fun.barryhome.wallet.domain.model.enums.InOutFlag;
+import fun.barryhome.wallet.common.enums.InOutFlag;
 
 /**
  * Created on 2020/9/7 9:57 上午

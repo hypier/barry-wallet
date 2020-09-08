@@ -1,4 +1,4 @@
-package fun.barryhome.wallet;
+package fun.barryhome.wallet.common;
 
 /**
  * Created on 2020/9/7 11:32 上午

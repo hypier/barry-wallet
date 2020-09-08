@@ -1,7 +1,7 @@
 package fun.barryhome.wallet.service;
 
-import fun.barryhome.wallet.domain.model.Wallet;
-import fun.barryhome.wallet.domain.model.enums.WalletStatus;
+import fun.barryhome.wallet.common.enums.WalletStatus;
+import fun.barryhome.wallet.common.model.Wallet;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
