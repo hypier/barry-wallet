@@ -7,15 +7,15 @@ import java.util.Calendar;
 
 /**
  * Created on 2020/9/9 10:56 上午
- *
+ * 不允许超时
  * @author barry
  * Description:
  */
-public class NoTimeOutAllowed implements CheckPolicy {
+public class NoTimeoutAllowed implements CheckPolicy {
 
     private final TradeRecord tradeRecord;
 
-    public NoTimeOutAllowed(TradeRecord tradeRecord) {
+    public NoTimeoutAllowed(TradeRecord tradeRecord) {
         this.tradeRecord = tradeRecord;
     }
 

@@ -6,18 +6,18 @@ import fun.barryhome.wallet.common.model.Wallet;
 
 /**
  * Created on 2020/9/7 11:29 上午
- *
+ * 不允许非激活状态
  * @author barry
  * Description:
  */
-public class NoStatusAllowed implements CheckPolicy {
+public class NoAvailableStatusAllowed implements CheckPolicy {
 
     /**
      * 钱包
      */
     private final Wallet wallet;
 
-    public NoStatusAllowed(Wallet wallet) {
+    public NoAvailableStatusAllowed(Wallet wallet) {
         this.wallet = wallet;
     }
 

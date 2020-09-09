@@ -8,7 +8,7 @@ import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.LockBehavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
-import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import fun.barryhome.wallet.domain.policy.NoAvailableStatusAllowed;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class LockService extends DefaultService {
             @Override
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
-                        .add(new NoStatusAllowed(getWallet()))
+                        .add(new NoAvailableStatusAllowed(getWallet()))
                         .build();
             }
         };

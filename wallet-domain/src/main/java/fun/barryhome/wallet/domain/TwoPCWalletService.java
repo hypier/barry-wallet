@@ -12,9 +12,4 @@ public interface TwoPCWalletService {
      * 处理中
      */
     void process();
-
-    /**
-     * 完成
-     */
-    void done();
 }

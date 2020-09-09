@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * Created on 2020/9/7 11:29 上午
- *
+ * 不允许透支
  * @author barry
  * Description:
  */

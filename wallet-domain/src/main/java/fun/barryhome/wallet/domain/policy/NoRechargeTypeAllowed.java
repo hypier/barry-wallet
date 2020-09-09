@@ -7,15 +7,15 @@ import fun.barryhome.wallet.common.model.TradeRecord;
 
 /**
  * Created on 2020/9/8 7:40 下午
- *
+ * 不允许非充值类型
  * @author barry
  * Description:
  */
-public class NotRechargeAllowed implements CheckPolicy {
+public class NoRechargeTypeAllowed implements CheckPolicy {
 
     private final TradeRecord tradeRecord;
 
-    public NotRechargeAllowed(TradeRecord tradeRecord){
+    public NoRechargeTypeAllowed(TradeRecord tradeRecord){
         this.tradeRecord = tradeRecord;
     }
 

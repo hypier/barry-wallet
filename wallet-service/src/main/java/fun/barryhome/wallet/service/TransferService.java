@@ -11,7 +11,7 @@ import fun.barryhome.wallet.domain.behavior.DebitBehavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
-import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import fun.barryhome.wallet.domain.policy.NoAvailableStatusAllowed;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -62,7 +62,7 @@ public class TransferService implements WalletService {
                     public List<CheckPolicy> checkPolicies() {
                         return CheckPolicyBuilder.builder()
                                 .add(new NoOverdraftAllowed(fromWallet, tradeAmount))
-                                .add(new NoStatusAllowed(fromWallet))
+                                .add(new NoAvailableStatusAllowed(fromWallet))
                                 .build();
                     }
                 };

@@ -4,31 +4,29 @@
   <OriginalElement>fun.barryhome.wallet.domain</OriginalElement>
   <nodes>
     <node x="0.0" y="736.0">fun.barryhome.wallet.domain.behavior.LockBehavior</node>
-    <node x="285.25" y="0.0">fun.barryhome.wallet.domain.WalletService</node>
+    <node x="290.50000000000006" y="0.0">fun.barryhome.wallet.domain.WalletService</node>
     <node x="179.49999999999997" y="605.0">fun.barryhome.wallet.domain.behavior.DefaultBehavior</node>
     <node x="0.0" y="970.0">fun.barryhome.wallet.domain.policy.NoOverdraftAllowed</node>
-    <node x="241.00000000000006" y="970.0">fun.barryhome.wallet.domain.policy.NoStatusAllowed</node>
-    <node x="453.00000000000006" y="970.0">fun.barryhome.wallet.domain.policy.NoTimeOutAllowed</node>
-    <node x="477.00000000000006" y="862.0">fun.barryhome.wallet.domain.policy.CheckPolicy</node>
+    <node x="926.0" y="970.0">fun.barryhome.wallet.domain.policy.NoStatusAllowed</node>
+    <node x="240.99999999999994" y="970.0">fun.barryhome.wallet.domain.policy.NoTimeOutAllowed</node>
+    <node x="496.49999999999994" y="862.0">fun.barryhome.wallet.domain.policy.CheckPolicy</node>
     <node x="605.0" y="474.0">fun.barryhome.wallet.domain.policy.CheckPolicyBuilder</node>
-    <node x="200.99999999999997" y="474.0">fun.barryhome.wallet.domain.behavior.Behavior</node>
-    <node x="916.0" y="970.0">fun.barryhome.wallet.domain.policy.NoProcessAllowed</node>
-    <node x="52.75" y="349.0">fun.barryhome.wallet.domain.DefaultTowPCService</node>
+    <node x="195.49999999999997" y="474.0">fun.barryhome.wallet.domain.behavior.Behavior</node>
+    <node x="704.0" y="970.0">fun.barryhome.wallet.domain.policy.NoProcessAllowed</node>
+    <node x="52.75000000000003" y="349.0">fun.barryhome.wallet.domain.DefaultTowPCService</node>
     <node x="387.0" y="736.0">fun.barryhome.wallet.domain.behavior.DebitBehavior</node>
+    <node x="462.99999999999994" y="970.0">fun.barryhome.wallet.domain.policy.NotRechargeAllowed</node>
     <node x="183.99999999999997" y="736.0">fun.barryhome.wallet.domain.behavior.CreditBehavior</node>
-    <node x="675.0" y="970.0">fun.barryhome.wallet.domain.policy.NotRechargeAllowed</node>
-    <node x="0.0" y="152.5">fun.barryhome.wallet.domain.TwoPCWalletService</node>
+    <node x="255.50000000000003" y="108.0">fun.barryhome.wallet.domain.DefaultService</node>
     <node x="303.75" y="327.0">fun.barryhome.wallet.domain.DefaultService.TradeConfig</node>
-    <node x="257.75" y="108.0">fun.barryhome.wallet.domain.DefaultService</node>
-    <node x="616.0" y="582.0">fun.barryhome.wallet.domain.policy.CheckPolicyBuilder.Builder</node>
+    <node x="0.0" y="152.5">fun.barryhome.wallet.domain.TwoPCWalletService</node>
+    <node x="609.5" y="582.0">fun.barryhome.wallet.domain.policy.CheckPolicyBuilder.Builder</node>
   </nodes>
   <notes />
   <edges>
     <edge source="fun.barryhome.wallet.domain.policy.NotRechargeAllowed" target="fun.barryhome.wallet.domain.policy.CheckPolicy">
       <point x="0.0" y="-29.0" />
-      <point x="785.5" y="950.0" />
-      <point x="584.8" y="950.0" />
-      <point x="30.799999999999955" y="29.0" />
+      <point x="0.0" y="29.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.behavior.DebitBehavior" target="fun.barryhome.wallet.domain.behavior.DefaultBehavior">
       <point x="0.0" y="-40.5" />
@@ -38,7 +36,9 @@
     </edge>
     <edge source="fun.barryhome.wallet.domain.policy.NoTimeOutAllowed" target="fun.barryhome.wallet.domain.policy.CheckPolicy">
       <point x="0.0" y="-29.0" />
-      <point x="0.0" y="29.0" />
+      <point x="341.99999999999994" y="950.0" />
+      <point x="542.7" y="950.0" />
+      <point x="-30.799999999999955" y="29.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.behavior.DefaultBehavior" target="fun.barryhome.wallet.domain.behavior.Behavior">
       <point x="0.0" y="-40.5" />
@@ -46,9 +46,9 @@
     </edge>
     <edge source="fun.barryhome.wallet.domain.policy.NoProcessAllowed" target="fun.barryhome.wallet.domain.policy.CheckPolicy">
       <point x="0.0" y="-29.0" />
-      <point x="1017.0" y="940.0" />
-      <point x="615.6000000000001" y="940.0" />
-      <point x="61.60000000000002" y="29.0" />
+      <point x="805.0" y="950.0" />
+      <point x="604.3" y="950.0" />
+      <point x="30.799999999999955" y="29.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.behavior.CreditBehavior" target="fun.barryhome.wallet.domain.behavior.DefaultBehavior">
       <point x="0.0" y="-40.5" />
@@ -63,18 +63,18 @@
       <point x="0.0" y="40.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.DefaultService" target="fun.barryhome.wallet.domain.WalletService">
-      <point x="0.0" y="-84.5" />
+      <point x="2.8421709430404007E-14" y="-84.5" />
       <point x="0.0" y="29.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.policy.NoStatusAllowed" target="fun.barryhome.wallet.domain.policy.CheckPolicy">
       <point x="0.0" y="-29.0" />
-      <point x="337.00000000000006" y="950.0" />
-      <point x="523.2" y="950.0" />
-      <point x="-30.799999999999955" y="29.0" />
+      <point x="1022.0" y="940.0" />
+      <point x="635.0999999999999" y="940.0" />
+      <point x="61.60000000000002" y="29.0" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.DefaultService.TradeConfig" target="fun.barryhome.wallet.domain.DefaultService">
       <point x="0.0" y="-51.0" />
-      <point x="57.0" y="84.5" />
+      <point x="60.75" y="84.5" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.behavior.LockBehavior" target="fun.barryhome.wallet.domain.behavior.DefaultBehavior">
       <point x="0.0" y="-40.5" />
@@ -84,21 +84,19 @@
     </edge>
     <edge source="fun.barryhome.wallet.domain.DefaultTowPCService" target="fun.barryhome.wallet.domain.DefaultService">
       <point x="57.75" y="-29.0" />
-      <point x="226.0" y="302.0" />
-      <point x="314.75" y="302.0" />
-      <point x="-57.0" y="84.5" />
+      <point x="226.00000000000003" y="302.0" />
+      <point x="316.25" y="302.0" />
+      <point x="-60.75" y="84.5" />
     </edge>
     <edge source="fun.barryhome.wallet.domain.policy.NoOverdraftAllowed" target="fun.barryhome.wallet.domain.policy.CheckPolicy">
       <point x="0.0" y="-29.0" />
       <point x="110.5" y="940.0" />
-      <point x="492.40000000000003" y="940.0" />
+      <point x="511.8999999999999" y="940.0" />
       <point x="-61.60000000000002" y="29.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.44751908396946566" x="559.0" y="514.0" />
-  <SelectedNodes>
-    <node>fun.barryhome.wallet.domain.behavior.LockBehavior</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="1.0" x="559.0" y="514.0" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Methods</Category>

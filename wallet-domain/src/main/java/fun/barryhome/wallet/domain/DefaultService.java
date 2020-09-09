@@ -8,7 +8,7 @@ import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
-import fun.barryhome.wallet.domain.policy.NoProcessAllowed;
+import fun.barryhome.wallet.domain.policy.NoProcessStatusAllowed;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -90,9 +90,13 @@ public abstract class DefaultService implements WalletService {
         tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
     }
 
+    /**
+     * 默认检查策略
+     * @return
+     */
     private List<CheckPolicy> defaultCheckPolicies() {
         return CheckPolicyBuilder.builder()
-                .add(new NoProcessAllowed(tradeRecord.getTradeStatus()))
+                .add(new NoProcessStatusAllowed(tradeRecord.getTradeStatus()))
                 .build();
     }
 

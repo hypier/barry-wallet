@@ -44,10 +44,10 @@ public class RechargeRollbackService extends DefaultService {
             @Override
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
-                        .add(new NotRechargeAllowed(sourceTrade))
-                        .add(new NoTimeOutAllowed(sourceTrade))
+                        .add(new NoRechargeTypeAllowed(sourceTrade))
+                        .add(new NoTimeoutAllowed(sourceTrade))
                         .add(new NoOverdraftAllowed(getWallet(), getTradeAmount()))
-                        .add(new NoStatusAllowed(getWallet()))
+                        .add(new NoAvailableStatusAllowed(getWallet()))
                         .build();
             }
         };

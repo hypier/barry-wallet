@@ -9,7 +9,7 @@ import fun.barryhome.wallet.domain.behavior.DebitBehavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
 import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
 import fun.barryhome.wallet.domain.policy.NoOverdraftAllowed;
-import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
+import fun.barryhome.wallet.domain.policy.NoAvailableStatusAllowed;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ConsumeService extends DefaultService {
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
                         .add(new NoOverdraftAllowed(getWallet(), getTradeAmount()))
-                        .add(new NoStatusAllowed(getWallet()))
+                        .add(new NoAvailableStatusAllowed(getWallet()))
                         .build();
             }
         };

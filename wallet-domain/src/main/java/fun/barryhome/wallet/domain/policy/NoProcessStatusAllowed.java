@@ -5,14 +5,14 @@ import fun.barryhome.wallet.common.enums.TradeStatus;
 
 /**
  * Created on 2020/9/9 11:54 上午
- *
+ * 不允许非处理中状态
  * @author barry
  * Description:
  */
-public class NoProcessAllowed implements CheckPolicy {
+public class NoProcessStatusAllowed implements CheckPolicy {
     private final TradeStatus tradeStatus;
 
-    public NoProcessAllowed(TradeStatus tradeStatus) {
+    public NoProcessStatusAllowed(TradeStatus tradeStatus) {
         this.tradeStatus = tradeStatus;
     }
 
