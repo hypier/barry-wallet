@@ -11,14 +11,20 @@ import java.math.BigDecimal;
  * @author barry
  * Description:
  */
-public class NoOverdraftAllowed extends DefaultCheckPolicy {
+public class NoOverdraftAllowed implements CheckPolicy {
+
+    /**
+     * 钱包
+     */
+    private final Wallet wallet;
+
     /**
      * 金额
      */
     private final BigDecimal tradeAmount;
 
     public NoOverdraftAllowed(Wallet wallet, BigDecimal tradeAmount) {
-        super(wallet);
+        this.wallet = wallet;
         this.tradeAmount = tradeAmount;
     }
 

@@ -10,10 +10,15 @@ import fun.barryhome.wallet.common.model.Wallet;
  * @author barry
  * Description:
  */
-public class NoStatusAllowed extends DefaultCheckPolicy {
+public class NoStatusAllowed implements CheckPolicy {
+
+    /**
+     * 钱包
+     */
+    private final Wallet wallet;
 
     public NoStatusAllowed(Wallet wallet) {
-        super(wallet);
+        this.wallet = wallet;
     }
 
     /**
