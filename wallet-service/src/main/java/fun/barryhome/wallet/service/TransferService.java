@@ -91,6 +91,8 @@ public class TransferService implements WalletService {
             }
         };
 
+        toService.getTradeRecord().setSourceNumber(fromService.getTradeRecord().getTradeNumber());
+
         tradeRecords = new ArrayList<>();
         tradeRecords.add(fromService.getTradeRecord());
         tradeRecords.add(toService.getTradeRecord());

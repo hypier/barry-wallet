@@ -17,12 +17,15 @@ import java.util.List;
  */
 public class RechargeRollbackService extends DefaultService {
 
+    private final TradeRecord sourceTrade;
+
     public RechargeRollbackService(TradeRecord sourceTrade) {
         super(TradeRecord.builder()
                 .wallet(sourceTrade.getWallet())
                 .tradeAmount(sourceTrade.getTradeAmount())
                 .sourceNumber(sourceTrade.getTradeNumber())
                 .build());
+        this.sourceTrade = sourceTrade;
     }
 
     @Override
@@ -41,7 +44,8 @@ public class RechargeRollbackService extends DefaultService {
             @Override
             public List<CheckPolicy> checkPolicies() {
                 return CheckPolicyBuilder.builder()
-                        .add(new NotRechargeAllowed(getTradeRecord()))
+                        .add(new NotRechargeAllowed(sourceTrade))
+                        .add(new NoTimeOutAllowed(sourceTrade))
                         .add(new NoOverdraftAllowed(getWallet(), getTradeAmount()))
                         .add(new NoStatusAllowed(getWallet()))
                         .build();

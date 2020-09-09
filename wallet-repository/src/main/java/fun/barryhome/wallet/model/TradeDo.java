@@ -1,15 +1,22 @@
 package fun.barryhome.wallet.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import fun.barryhome.wallet.common.enums.InOutFlag;
 import fun.barryhome.wallet.common.enums.TradeStatus;
 import fun.barryhome.wallet.common.enums.TradeType;
+import fun.barryhome.wallet.common.model.TradeEvent;
+import fun.barryhome.wallet.convertor.TradeConvertor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.DomainEvents;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created on 2020/9/8 10:51 下午
@@ -69,6 +76,43 @@ public class TradeDo {
      */
     private String sourceNumber;
 
+    /**
+     * 创建时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(nullable = false, updatable = false)
+    private Date createTime;
+
+
+    /**
+     * 更新时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(nullable = false)
+    private Date updateTime = new Date();
+
+    /**
+     * 版本号
+     */
     @Version
     private Long version;
+
+    @PrePersist
+    void prePersist() {
+        createTime = new Date();
+        updateTime = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updateTime = new Date();
+    }
+
+    @DomainEvents
+    public List<Object> domainEvents(){
+        return Collections.singletonList(new TradeEvent(TradeConvertor.toEntity(this)));
+    }
+
 }

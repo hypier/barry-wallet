@@ -6,6 +6,7 @@ import fun.barryhome.wallet.common.model.TradeRecord;
 import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.repository.TradeRepository;
 import fun.barryhome.wallet.repository.WalletRepository;
+import fun.barryhome.wallet.service.RechargeRollbackService;
 import fun.barryhome.wallet.service.RechargeService;
 import fun.barryhome.wallet.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,10 +47,12 @@ public class TradeManager {
         RechargeService rechargeService = new RechargeService(wallet, tradeAmount);
         rechargeService.done();
 
-        walletRepository.save(rechargeService.getTradeRecord().getWallet());
-        tradeRepository.save(rechargeService.getTradeRecord());
+        TradeRecord tradeRecord = rechargeService.getTradeRecord();
+        // 保存
+        walletRepository.save(tradeRecord.getWallet());
+        tradeRepository.save(tradeRecord);
 
-        return rechargeService.getTradeRecord();
+        return tradeRecord;
     }
 
     /**
@@ -80,5 +82,24 @@ public class TradeManager {
 
         walletRepository.save(wallets);
         tradeRepository.save(transferService.getTradeRecords());
+    }
+
+    /**
+     * 充值撤销
+     * @param tradeNumber
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void rollback(String tradeNumber){
+        TradeRecord sourceTrade = tradeRepository.findByTradeNumber(tradeNumber);
+        if (sourceTrade == null){
+            throw new BizException("没有找到交易记录");
+        }
+
+        RechargeRollbackService rechargeRollbackService = new RechargeRollbackService(sourceTrade);
+        rechargeRollbackService.done();
+
+        // 保存
+        walletRepository.save(rechargeRollbackService.getTradeRecord().getWallet());
+        tradeRepository.save(rechargeRollbackService.getTradeRecord());
     }
 }

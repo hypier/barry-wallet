@@ -2,9 +2,7 @@ package fun.barryhome.wallet.service;
 
 import fun.barryhome.wallet.common.enums.WalletStatus;
 import fun.barryhome.wallet.common.model.Wallet;
-import fun.barryhome.wallet.event.TradeEventSender;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
@@ -19,12 +17,9 @@ import java.util.UUID;
 @SpringBootTest
 class RechargeRollbackServiceTest {
 
-    @Autowired
-    private TradeEventSender tradeEventSender;
-
     private Wallet initWallet(){
         return Wallet.builder()
-                .walletId(UUID.randomUUID().toString())
+                .walletId("4bfe7223-ec2e-4788-8921-c1d9f1c78081")
                 .balance(BigDecimal.valueOf(100))
                 .walletStatus(WalletStatus.AVAILABLE)
                 .build();
@@ -34,12 +29,10 @@ class RechargeRollbackServiceTest {
     void exec() {
         RechargeService rechargeService = new RechargeService(initWallet(), BigDecimal.valueOf(20));
         rechargeService.done();
-        //tradeEventSender.send(rechargeService.getTradeRecord());
         System.out.println(rechargeService.getTradeRecord());
 
         RechargeRollbackService rollbackService = new RechargeRollbackService(rechargeService.getTradeRecord());
         rollbackService.done();
-        //tradeEventSender.send(rollbackService.getTradeRecord());
         System.out.println(rollbackService.getTradeRecord());
     }
 }

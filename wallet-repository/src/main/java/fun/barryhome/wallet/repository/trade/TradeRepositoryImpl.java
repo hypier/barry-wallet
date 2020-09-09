@@ -1,9 +1,13 @@
 package fun.barryhome.wallet.repository.trade;
 
 import fun.barryhome.wallet.common.model.TradeRecord;
+import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.convertor.TradeConvertor;
+import fun.barryhome.wallet.convertor.WalletConvertor;
 import fun.barryhome.wallet.model.TradeDo;
+import fun.barryhome.wallet.model.WalletDo;
 import fun.barryhome.wallet.repository.TradeRepository;
+import fun.barryhome.wallet.repository.wallet.JPAWalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -25,6 +29,9 @@ public class TradeRepositoryImpl implements TradeRepository {
     @Autowired
     private JPATradeRepository jpaTradeRepository;
 
+    @Autowired
+    private JPAWalletRepository jpaWalletRepository;
+
     /**
      * 查询交易
      *
@@ -37,7 +44,13 @@ public class TradeRepositoryImpl implements TradeRepository {
         Example<TradeDo> example = Example.of(trade);
         TradeDo tradeDo = jpaTradeRepository.findOne(example).orElse(null);
 
-        return TradeConvertor.toEntity(tradeDo);
+        if (tradeDo == null){
+            return null;
+        }
+
+        WalletDo walletDo = jpaWalletRepository.findById(tradeDo.getWalletId()).orElse(null);
+
+        return TradeConvertor.toEntity(tradeDo, WalletConvertor.toEntity(walletDo));
     }
 
     /**

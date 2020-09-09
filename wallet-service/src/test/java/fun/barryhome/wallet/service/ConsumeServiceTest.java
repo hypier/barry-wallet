@@ -2,9 +2,7 @@ package fun.barryhome.wallet.service;
 
 import fun.barryhome.wallet.common.enums.WalletStatus;
 import fun.barryhome.wallet.common.model.Wallet;
-import fun.barryhome.wallet.event.TradeEventSender;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
@@ -21,8 +19,6 @@ import java.util.UUID;
 @SpringBootTest
 class ConsumeServiceTest {
 
-    @Autowired
-    private TradeEventSender tradeEventSender;
 
     private Wallet initWallet(){
         return Wallet.builder()
@@ -37,7 +33,6 @@ class ConsumeServiceTest {
 
         ConsumeService consumeService = new ConsumeService(initWallet(), BigDecimal.valueOf(20));
         consumeService.done();
-        tradeEventSender.send(consumeService.getTradeRecord());
 
         System.out.println(consumeService.getTradeRecord());
     }

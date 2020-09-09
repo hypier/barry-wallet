@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created on 2020/9/7 4:44 下午
@@ -53,6 +54,14 @@ public class TradeRecord {
      * 原交易号
      */
     private String sourceNumber;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
     /**
      * 版本号
      */

@@ -29,7 +29,7 @@ public class TradeConvertor {
     }
 
     public static List<TradeDo> toDto(Iterable<TradeRecord> tradeRecords) {
-        if (tradeRecords == null){
+        if (tradeRecords == null) {
             return null;
         }
 
@@ -47,6 +47,17 @@ public class TradeConvertor {
         TradeRecord tradeRecord = TradeRecord.builder().build();
         BeanUtils.copyProperties(tradeDo, tradeRecord);
         tradeRecord.setWallet(Wallet.builder().walletId(tradeDo.getWalletId()).build());
+        return tradeRecord;
+    }
+
+    public static TradeRecord toEntity(TradeDo tradeDo, Wallet wallet) {
+        if (tradeDo == null) {
+            return null;
+        }
+
+        TradeRecord tradeRecord = TradeRecord.builder().build();
+        BeanUtils.copyProperties(tradeDo, tradeRecord);
+        tradeRecord.setWallet(wallet);
         return tradeRecord;
     }
 }
