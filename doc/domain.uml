@@ -5,8 +5,8 @@
   <nodes>
     <node x="0.0" y="736.0">fun.barryhome.wallet.domain.behavior.LockBehavior</node>
     <node x="285.25" y="0.0">fun.barryhome.wallet.domain.WalletService</node>
-    <node x="0.0" y="970.0">fun.barryhome.wallet.domain.policy.NoOverdraftAllowed</node>
     <node x="179.49999999999997" y="605.0">fun.barryhome.wallet.domain.behavior.DefaultBehavior</node>
+    <node x="0.0" y="970.0">fun.barryhome.wallet.domain.policy.NoOverdraftAllowed</node>
     <node x="241.00000000000006" y="970.0">fun.barryhome.wallet.domain.policy.NoStatusAllowed</node>
     <node x="453.00000000000006" y="970.0">fun.barryhome.wallet.domain.policy.NoTimeOutAllowed</node>
     <node x="477.00000000000006" y="862.0">fun.barryhome.wallet.domain.policy.CheckPolicy</node>
@@ -15,8 +15,8 @@
     <node x="916.0" y="970.0">fun.barryhome.wallet.domain.policy.NoProcessAllowed</node>
     <node x="52.75" y="349.0">fun.barryhome.wallet.domain.DefaultTowPCService</node>
     <node x="387.0" y="736.0">fun.barryhome.wallet.domain.behavior.DebitBehavior</node>
-    <node x="675.0" y="970.0">fun.barryhome.wallet.domain.policy.NotRechargeAllowed</node>
     <node x="183.99999999999997" y="736.0">fun.barryhome.wallet.domain.behavior.CreditBehavior</node>
+    <node x="675.0" y="970.0">fun.barryhome.wallet.domain.policy.NotRechargeAllowed</node>
     <node x="0.0" y="152.5">fun.barryhome.wallet.domain.TwoPCWalletService</node>
     <node x="303.75" y="327.0">fun.barryhome.wallet.domain.DefaultService.TradeConfig</node>
     <node x="257.75" y="108.0">fun.barryhome.wallet.domain.DefaultService</node>
@@ -95,7 +95,7 @@
       <point x="-61.60000000000002" y="29.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9122137404580153" x="559.0" y="514.0" />
+  <settings layout="Hierarchic Group" zoom="0.44751908396946566" x="559.0" y="514.0" />
   <SelectedNodes>
     <node>fun.barryhome.wallet.domain.behavior.LockBehavior</node>
   </SelectedNodes>

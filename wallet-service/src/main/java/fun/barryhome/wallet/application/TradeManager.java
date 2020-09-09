@@ -34,13 +34,14 @@ public class TradeManager {
 
     /**
      * 充值
+     *
      * @param walletId
      * @param tradeAmount
      */
     @Transactional(rollbackFor = Exception.class)
     public TradeRecord recharge(String walletId, BigDecimal tradeAmount) {
         Wallet wallet = walletRepository.findByWalletId(walletId);
-        if (wallet == null){
+        if (wallet == null) {
             throw new BizException("没有找到钱包");
         }
 
@@ -50,20 +51,20 @@ public class TradeManager {
         TradeRecord tradeRecord = rechargeService.getTradeRecord();
         // 保存
         walletRepository.save(tradeRecord.getWallet());
-        tradeRepository.save(tradeRecord);
 
-        return tradeRecord;
+        return tradeRepository.save(tradeRecord);
     }
 
     /**
      * 充值 - 处理中
+     *
      * @param walletId
      * @param tradeAmount
      */
     @Transactional(rollbackFor = Exception.class)
     public TradeRecord rechargeProcess(String walletId, BigDecimal tradeAmount) {
         Wallet wallet = walletRepository.findByWalletId(walletId);
-        if (wallet == null){
+        if (wallet == null) {
             throw new BizException("没有找到钱包");
         }
 
@@ -79,13 +80,14 @@ public class TradeManager {
 
     /**
      * 充值 -- 完成
+     *
      * @param tradeNumber
      */
     @Transactional(rollbackFor = Exception.class)
     public TradeRecord rechargeDone(String tradeNumber) {
 
         TradeRecord trade = tradeRepository.findByTradeNumber(tradeNumber);
-        if (trade == null){
+        if (trade == null) {
             throw new BizException("没有找到交易记录");
         }
 
@@ -95,27 +97,27 @@ public class TradeManager {
         TradeRecord tradeRecord = rechargeService.getTradeRecord();
         // 保存
         walletRepository.save(tradeRecord.getWallet());
-        tradeRepository.save(tradeRecord);
 
-        return tradeRecord;
+        return tradeRepository.save(tradeRecord);
     }
 
 
     /**
      * 转账
+     *
      * @param fromWalletId
      * @param toWalletId
      * @param tradeAmount
      */
     @Transactional(rollbackFor = Exception.class)
-    public void transfer(String fromWalletId, String toWalletId, BigDecimal tradeAmount){
+    public void transfer(String fromWalletId, String toWalletId, BigDecimal tradeAmount) {
         Wallet fromWallet = walletRepository.findByWalletId(fromWalletId);
-        if (fromWallet == null){
+        if (fromWallet == null) {
             throw new BizException("没有找到钱包");
         }
 
         Wallet toWallet = walletRepository.findByWalletId(toWalletId);
-        if (toWallet == null){
+        if (toWallet == null) {
             throw new BizException("没有找到钱包");
         }
 
@@ -132,12 +134,13 @@ public class TradeManager {
 
     /**
      * 充值撤销
+     *
      * @param tradeNumber
      */
     @Transactional(rollbackFor = Exception.class)
-    public void rollback(String tradeNumber){
+    public TradeRecord rollback(String tradeNumber) {
         TradeRecord sourceTrade = tradeRepository.findByTradeNumber(tradeNumber);
-        if (sourceTrade == null){
+        if (sourceTrade == null) {
             throw new BizException("没有找到交易记录");
         }
 
@@ -147,6 +150,8 @@ public class TradeManager {
         // 保存
         walletRepository.save(rechargeRollbackService.getTradeRecord().getWallet());
         tradeRepository.save(rechargeRollbackService.getTradeRecord());
+
+        return rechargeRollbackService.getTradeRecord();
     }
 
 

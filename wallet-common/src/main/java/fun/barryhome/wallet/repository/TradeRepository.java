@@ -21,7 +21,7 @@ public interface TradeRepository {
      * 保存交易
      * @param tradeRecord
      */
-    void save(TradeRecord tradeRecord);
+    TradeRecord save(TradeRecord tradeRecord);
 
     /**
      * 批量保存

@@ -58,9 +58,11 @@ public class TradeRepositoryImpl implements TradeRepository {
      * @param tradeRecord
      */
     @Override
-    public void save(TradeRecord tradeRecord) {
+    public TradeRecord save(TradeRecord tradeRecord) {
         TradeDo tradeDo = TradeConvertor.toDto(tradeRecord);
         jpaTradeRepository.save(tradeDo);
+
+        return TradeConvertor.toEntity(tradeDo);
     }
 
     /**
