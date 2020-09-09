@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created on 2020/9/8 6:21 下午
@@ -44,7 +43,7 @@ public class WalletRepositoryImpl implements WalletRepository {
     @Override
     public void save(Wallet wallet) {
         WalletDo walletDo = WalletConvertor.toDto(wallet);
-        jpaWalletRepository.save(Objects.requireNonNull(walletDo));
+        jpaWalletRepository.save(walletDo);
     }
 
     /**

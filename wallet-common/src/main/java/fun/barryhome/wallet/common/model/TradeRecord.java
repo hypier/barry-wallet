@@ -18,6 +18,8 @@ import java.util.Date;
 @Data
 @Builder
 public class TradeRecord {
+
+    private Long tradeId;
     /**
      * 交易号
      */

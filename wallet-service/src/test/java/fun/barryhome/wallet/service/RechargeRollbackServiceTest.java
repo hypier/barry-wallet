@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 /**
  * Created on 2020/9/8 4:59 下午

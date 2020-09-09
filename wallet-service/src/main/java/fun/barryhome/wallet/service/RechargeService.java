@@ -3,7 +3,7 @@ package fun.barryhome.wallet.service;
 import fun.barryhome.wallet.common.enums.TradeType;
 import fun.barryhome.wallet.common.model.TradeRecord;
 import fun.barryhome.wallet.common.model.Wallet;
-import fun.barryhome.wallet.domain.DefaultService;
+import fun.barryhome.wallet.domain.DefaultTowPCService;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.behavior.CreditBehavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author barry
  * Description:
  */
-public class RechargeService extends DefaultService {
+public class RechargeService extends DefaultTowPCService {
 
     public RechargeService(TradeRecord tradeRecord) {
         super(tradeRecord);

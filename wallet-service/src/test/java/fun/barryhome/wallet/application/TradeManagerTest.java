@@ -24,6 +24,15 @@ class TradeManagerTest {
     }
 
     @Test
+    void rechargeProcess() {
+        tradeManager.rechargeProcess("4bfe7223-ec2e-4788-8921-c1d9f1c7808o", BigDecimal.valueOf(20));
+    }
+
+    @Test
+    void rechargeDone() {
+        tradeManager.rechargeDone("d524f0dc-54a7-43ff-84d6-cf9b08eea07c");
+    }
+    @Test
     void transfer() {
         tradeManager.transfer("4bfe7223-ec2e-4788-8921-c1d9f1c78081","4bfe7223-ec2e-4788-8921-c1d9f1c7808o",
                  BigDecimal.valueOf(50));

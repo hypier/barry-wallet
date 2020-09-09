@@ -56,6 +56,52 @@ public class TradeManager {
     }
 
     /**
+     * 充值 - 处理中
+     * @param walletId
+     * @param tradeAmount
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public TradeRecord rechargeProcess(String walletId, BigDecimal tradeAmount) {
+        Wallet wallet = walletRepository.findByWalletId(walletId);
+        if (wallet == null){
+            throw new BizException("没有找到钱包");
+        }
+
+        RechargeService rechargeService = new RechargeService(wallet, tradeAmount);
+        rechargeService.process();
+
+        TradeRecord tradeRecord = rechargeService.getTradeRecord();
+        // 保存
+        tradeRepository.save(tradeRecord);
+
+        return tradeRecord;
+    }
+
+    /**
+     * 充值 -- 完成
+     * @param tradeNumber
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public TradeRecord rechargeDone(String tradeNumber) {
+
+        TradeRecord trade = tradeRepository.findByTradeNumber(tradeNumber);
+        if (trade == null){
+            throw new BizException("没有找到交易记录");
+        }
+
+        RechargeService rechargeService = new RechargeService(trade);
+        rechargeService.done();
+
+        TradeRecord tradeRecord = rechargeService.getTradeRecord();
+        // 保存
+        walletRepository.save(tradeRecord.getWallet());
+        tradeRepository.save(tradeRecord);
+
+        return tradeRecord;
+    }
+
+
+    /**
      * 转账
      * @param fromWalletId
      * @param toWalletId
@@ -102,4 +148,6 @@ public class TradeManager {
         walletRepository.save(rechargeRollbackService.getTradeRecord().getWallet());
         tradeRepository.save(rechargeRollbackService.getTradeRecord());
     }
+
+
 }

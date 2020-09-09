@@ -7,6 +7,8 @@ import fun.barryhome.wallet.common.model.TradeRecord;
 import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.domain.behavior.Behavior;
 import fun.barryhome.wallet.domain.policy.CheckPolicy;
+import fun.barryhome.wallet.domain.policy.CheckPolicyBuilder;
+import fun.barryhome.wallet.domain.policy.NoProcessAllowed;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,6 @@ public abstract class DefaultService implements WalletService {
     protected abstract static class TradeConfig {
         /**
          * 交易类型
-         *
          */
         public abstract TradeType tradeType();
 
@@ -57,7 +58,6 @@ public abstract class DefaultService implements WalletService {
 
         tradeRecord.setTradeType(tradeConfig().tradeType());
         tradeRecord.setInOutFlag(tradeConfig().behavior().getInOutFlag());
-        tradeRecord.setTradeStatus(TradeStatus.PROCESSING);
 
         if (Strings.isEmpty(tradeRecord.getTradeNumber())) {
             tradeRecord.setTradeNumber(UUID.randomUUID().toString());
@@ -82,15 +82,31 @@ public abstract class DefaultService implements WalletService {
      */
     @Override
     public void done() {
-        List<CheckPolicy> checkPolicies = tradeConfig().checkPolicies();
-        if (checkPolicies != null && checkPolicies.size() > 0) {
-            checkPolicies.forEach(CheckPolicy::check);
-        }
+        check();
 
         tradeConfig().behavior().doAction();
 
         tradeRecord.setBalance(tradeRecord.getWallet().getBalance());
         tradeRecord.setTradeStatus(TradeStatus.SUCCEED);
+    }
+
+    private List<CheckPolicy> defaultCheckPolicies() {
+        return CheckPolicyBuilder.builder()
+                .add(new NoProcessAllowed(tradeRecord.getTradeStatus()))
+                .build();
+    }
+
+    /**
+     * 检查策略
+     */
+    void check() {
+
+        List<CheckPolicy> checkPolicies = defaultCheckPolicies();
+        if (tradeConfig().checkPolicies() != null) {
+            checkPolicies.addAll(tradeConfig().checkPolicies());
+        }
+
+        checkPolicies.forEach(CheckPolicy::check);
     }
 
 }

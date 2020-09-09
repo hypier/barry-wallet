@@ -1,7 +1,6 @@
 package fun.barryhome.wallet.repository.trade;
 
 import fun.barryhome.wallet.common.model.TradeRecord;
-import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.convertor.TradeConvertor;
 import fun.barryhome.wallet.convertor.WalletConvertor;
 import fun.barryhome.wallet.model.TradeDo;
@@ -61,7 +60,7 @@ public class TradeRepositoryImpl implements TradeRepository {
     @Override
     public void save(TradeRecord tradeRecord) {
         TradeDo tradeDo = TradeConvertor.toDto(tradeRecord);
-        jpaTradeRepository.save(Objects.requireNonNull(tradeDo));
+        jpaTradeRepository.save(tradeDo);
     }
 
     /**
