@@ -22,4 +22,11 @@ public interface TradeRepository {
      * @param tradeRecord
      */
     void save(TradeRecord tradeRecord);
+
+    /**
+     * 批量保存
+     * @param tradeRecords
+     * @return
+     */
+    void save(Iterable<TradeRecord> tradeRecords);
 }

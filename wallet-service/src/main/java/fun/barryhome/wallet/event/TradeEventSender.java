@@ -27,7 +27,7 @@ public class TradeEventSender {
         applicationEventPublisher.publishEvent(new TradeEvent(tradeRecord));
     }
 
-    public void send(TradeRecord[] tradeRecords) {
+    public void send(Iterable<TradeRecord> tradeRecords) {
         for (TradeRecord t : tradeRecords) {
             applicationEventPublisher.publishEvent(new TradeEvent(t));
         }

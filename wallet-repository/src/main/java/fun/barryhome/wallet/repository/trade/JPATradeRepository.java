@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author barry
  * Description:
  */
-public interface JPATradeRepository extends JpaRepository<TradeDo, String> {
+public interface JPATradeRepository extends JpaRepository<TradeDo, Long> {
 }

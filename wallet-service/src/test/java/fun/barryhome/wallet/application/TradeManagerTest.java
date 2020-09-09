@@ -20,6 +20,12 @@ class TradeManagerTest {
 
     @Test
     void recharge() {
-        tradeManager.recharge("4bfe7223-ec2e-4788-8921-c1d9f1c7808e", BigDecimal.valueOf(20));
+        tradeManager.recharge("4bfe7223-ec2e-4788-8921-c1d9f1c7808o", BigDecimal.valueOf(20));
+    }
+
+    @Test
+    void transfer() {
+        tradeManager.transfer("4bfe7223-ec2e-4788-8921-c1d9f1c7808o",
+                "4bfe7223-ec2e-4788-8921-c1d9f1c78081", BigDecimal.valueOf(50));
     }
 }

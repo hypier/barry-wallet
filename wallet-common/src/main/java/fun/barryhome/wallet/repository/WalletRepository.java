@@ -22,4 +22,11 @@ public interface WalletRepository {
      * @param wallet
      */
     void save(Wallet wallet);
+
+    /**
+     * 批量保存
+     * @param wallets
+     * @return
+     */
+    void save(Iterable<Wallet> wallets);
 }

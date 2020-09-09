@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Version;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -26,10 +25,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class TradeDo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long tradeId;
     /**
      * 交易号
      */
-    @Id
+    @Column(unique = true)
     private String tradeNumber;
     /**
      * 交易金额

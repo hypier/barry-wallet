@@ -15,6 +15,7 @@ import fun.barryhome.wallet.domain.policy.NoStatusAllowed;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class TransferService implements WalletService {
     private final Wallet toWallet;
 
     @Getter
-    private TradeRecord[] tradeRecords;
+    private List<TradeRecord> tradeRecords;
 
     public TransferService(Wallet fromWallet, Wallet toWallet, BigDecimal tradeAmount) {
         this.fromWallet = fromWallet;
@@ -90,9 +91,9 @@ public class TransferService implements WalletService {
             }
         };
 
-        tradeRecords = new TradeRecord[2];
-        tradeRecords[0] = fromService.getTradeRecord();
-        tradeRecords[1] = toService.getTradeRecord();
+        tradeRecords = new ArrayList<>();
+        tradeRecords.add(fromService.getTradeRecord());
+        tradeRecords.add(toService.getTradeRecord());
 
         fromService.done();
         toService.done();
