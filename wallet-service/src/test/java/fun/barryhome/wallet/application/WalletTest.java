@@ -2,7 +2,7 @@ package fun.barryhome.wallet.application;
 
 import fun.barryhome.wallet.common.enums.WalletStatus;
 import fun.barryhome.wallet.common.model.Wallet;
-import fun.barryhome.wallet.repository.WalletRepository;
+import fun.barryhome.wallet.repository.wallet.WalletRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

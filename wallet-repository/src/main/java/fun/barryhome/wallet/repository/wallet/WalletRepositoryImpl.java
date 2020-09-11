@@ -3,7 +3,6 @@ package fun.barryhome.wallet.repository.wallet;
 import fun.barryhome.wallet.common.model.Wallet;
 import fun.barryhome.wallet.convertor.WalletConvertor;
 import fun.barryhome.wallet.model.WalletDo;
-import fun.barryhome.wallet.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

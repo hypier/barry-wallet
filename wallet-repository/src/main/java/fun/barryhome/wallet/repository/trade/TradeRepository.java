@@ -1,4 +1,4 @@
-package fun.barryhome.wallet.repository;
+package fun.barryhome.wallet.repository.trade;
 
 
 import fun.barryhome.wallet.common.model.TradeRecord;

@@ -5,7 +5,6 @@ import fun.barryhome.wallet.convertor.TradeConvertor;
 import fun.barryhome.wallet.convertor.WalletConvertor;
 import fun.barryhome.wallet.model.TradeDo;
 import fun.barryhome.wallet.model.WalletDo;
-import fun.barryhome.wallet.repository.TradeRepository;
 import fun.barryhome.wallet.repository.wallet.JPAWalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created on 2020/9/8 6:17 下午

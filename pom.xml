@@ -12,6 +12,7 @@
         <module>wallet-repository</module>
         <module>wallet-common</module>
         <module>wallet-client</module>
+        <module>wallet-provider</module>
     </modules>
     <name>barry-wallet</name>
     <description>Demo project for Spring Boot</description>
