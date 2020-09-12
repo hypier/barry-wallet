@@ -11,7 +11,7 @@
 
 * 交易方式 `WalletService`：简单实现多种交易方式需求
 * 交易行为 `Behavior`：用行为定义交易后产生的结果变化，如增加/减少金额，属性变化等
-* 交易策略 `CheckPolicy`：不同的策略组合实现不同的交易行为需求
+* 交易策略 `CheckPolicy`：不同策略组合实现不同的交易行为需求
 
 ## 使用指南
 
@@ -84,7 +84,6 @@ public class LockBehavior extends DefaultBehavior {
     /**
      * 进出状态
      *
-     * @return
      */
     @Override
     public InOutFlag getInOutFlag() {
@@ -129,4 +128,4 @@ public class NoAvailableStatusAllowed implements CheckPolicy {
 
 ## License 授权协议
 
-这个项目 MIT 协议， 请点击 [LICENSE.md](LICENSE.md) 了解更多细节。
+这个项目 MIT 协议， 请点击 [LICENSE.md](LICENSE) 了解更多细节。
